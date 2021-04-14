@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
+//mongo
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/budget', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -22,8 +23,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/budget', {
   useFindAndModify: false,
 });
 
+//import models
+const Transaction = require('./models/transaction');
 // routes
 app.use(require('./routes/api.js'));
+
+//
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
